@@ -1,9 +1,10 @@
+import 'dotenv/config'
 import express from 'express'
 import router from './routes/index.routes.js'
 import { ValidationError } from 'express-validation'
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(router)
@@ -17,5 +18,5 @@ app.use(function (err, req, res, next) {
 })
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Library API is running url: http://localhost:${port}`)
 })
