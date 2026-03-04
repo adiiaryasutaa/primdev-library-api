@@ -10,37 +10,54 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "postgresql"
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+
+  borrowings Borrowings[]
+}
+
+model Categories {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+
+  books Books[]
 }
 
 model Books {
-  id           Int            @id @default(autoincrement())
-  title        String
-  author       String
-  year         Int
-  createdAt    DateTime       @default(now())
-  transactions Transactions[]
+  id         Int          @id @default(autoincrement())
+  title      String
+  author     String
+  year       Int
+  available  Boolean      @default(true)
+  categoryId Int?
+  createdAt  DateTime     @default(now())
+  borrowings Borrowings[]
+
+  category Categories? @relation(fields: [categoryId], references: [id])
 }
 
-model Transactions {
-  id        Int      @id @default(autoincrement())
-  bookId    Int
-  type      String
-  adminId   Int
-  timestamp DateTime @default(now())
+// Pivot Table for Many-to-Many relationship between Users and Books
+model Borrowings {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  bookId      Int
+  borrow_date DateTime  @default(now())
+  returned_at DateTime?
 
-  // Relations
-  book  Books  @relation(fields: [bookId], references: [id])
-  admin Admins @relation(fields: [adminId], references: [id])
-}
-
-model Admins {
-  id           Int            @id @default(autoincrement())
-  name         String
-  email        String         @unique
-  password     String
-  createdAt    DateTime       @default(now())
-  transactions Transactions[]
+  borrower Users @relation(fields: [userId], references: [id])
+  book     Books @relation(fields: [bookId], references: [id])
 }
