@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import prisma from '../database/config.database.js';
 import { getFileUrl } from '../helpers/upload.js';
 

@@ -1,5 +1,6 @@
 import bcrypt from 'bcryptjs';
 import 'dotenv/config';
+import { validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 import prisma from '../database/config.database.js';
 

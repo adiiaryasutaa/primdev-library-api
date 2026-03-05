@@ -1,3 +1,4 @@
+import { validationResult } from 'express-validator';
 import prisma from '../database/config.database.js';
 
 export const getAllBorrowings = async (req, res) => {
