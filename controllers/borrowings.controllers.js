@@ -49,11 +49,13 @@ export const createBorrowing = async (req, res) => {
     return res.status(400).json({ errors: validationErrors.array() });
   }
 
-  const { bookId } = req.body;
-  const userId = req.user.id;
+  const borrow = {
+    userId: parseInt(req.body.userId),
+    bookId: parseInt(req.body.bookId),
+  };
 
   const book = await prisma.books.findUnique({
-    where: { id: parseInt(bookId) },
+    where: { id: parseInt(borrow.bookId) },
     select: { available: true },
   });
 
@@ -70,19 +72,21 @@ export const createBorrowing = async (req, res) => {
   try {
     const borrowing = await prisma.$transaction(async (tx) => {
       const borrowing = await tx.borrowings.create({
-        data: { userId, bookId: parseInt(bookId) },
+        data: borrow,
         include: {
           borrower: { select: { id: true, name: true, email: true } },
           book: true,
         },
       });
 
-      await tx.books.update({
-        where: { id: parseInt(bookId) },
+      const book = await tx.books.update({
+        where: { id: parseInt(borrow.bookId) },
         data: {
           available: false,
         },
       });
+
+      borrowing.book = book;
 
       return borrowing;
     });
@@ -111,8 +115,8 @@ export const returnBook = async (req, res) => {
   }
 
   try {
-    const updatedBorrowing = await prisma.$transaction(async (tx) => {
-      const updatedBorrowing = await tx.borrowings.update({
+    const returnedBorrowing = await prisma.$transaction(async (tx) => {
+      const returnedBorrowing = await tx.borrowings.update({
         where: { id: parseInt(id) },
         data: { returned_at: new Date() },
         include: {
@@ -126,12 +130,14 @@ export const returnBook = async (req, res) => {
         data: { available: true },
       });
 
-      return updatedBorrowing;
+      returnedBorrowing.book.available = true;
+
+      return returnedBorrowing;
     });
 
     res.json({
       message: 'Book returned successfully',
-      borrowing: updatedBorrowing,
+      borrowing: returnedBorrowing,
     });
   } catch (error) {
     return res

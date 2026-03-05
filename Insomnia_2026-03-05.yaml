@@ -1,0 +1,768 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: Library API - Intermediate Class BE 2026
+meta:
+  id: wrk_b8974fb8b91b4cceb68e98ef723da880
+  created: 1772546679515
+  modified: 1772611500609
+  description: ""
+collection:
+  - url: "{{ API_ENDPOINT }}"
+    name: Index
+    meta:
+      id: req_fbc5e45d404340b6bd82111b610d4b78
+      created: 1772549745480
+      modified: 1772708044318
+      isPrivate: false
+      description: ""
+      sortKey: -1772700562190
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/12.3.1
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ API_ENDPOINT }}/login"
+    name: Login
+    meta:
+      id: req_6bf9b409cf594cdfadece5f9917653de
+      created: 1772550005138
+      modified: 1772708031290
+      isPrivate: false
+      description: ""
+      sortKey: -1772700562090
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "admin@gmail.com",
+        	"password": "password"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.3.1
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ API_ENDPOINT }}/register"
+    name: Register
+    meta:
+      id: req_6ccf9fea43dd4aba9787db4e9925175c
+      created: 1772690824247
+      modified: 1772708037519
+      isPrivate: false
+      description: ""
+      sortKey: -1772700562040
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name": "User 1",
+        	"email": "user1@gmail.com",
+        	"password": "password"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/12.4.0
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - name: Borrowings
+    meta:
+      id: fld_394bc70096de463e8c4638ab17c67070
+      created: 1772700421215
+      modified: 1772700421215
+      sortKey: -1772700421215
+      description: ""
+    children:
+      - url: "{{ API_ENDPOINT }}/borrowings"
+        name: Get all borrowings
+        meta:
+          id: req_9fe044e7492647d39ff6eaaa6224141f
+          created: 1772533675634
+          modified: 1772709406810
+          isPrivate: false
+          description: ""
+          sortKey: -1772700430156
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/borrowings/2"
+        name: Delete a borrowing
+        meta:
+          id: req_9837824431954fb1bbab4d4a63e80c1e
+          created: 1772533694938
+          modified: 1772709404747
+          isPrivate: false
+          description: ""
+          sortKey: -1772700429606
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/borrowings/3/return"
+        name: Return a book
+        meta:
+          id: req_7f520a817d6f4f3c9b52275616e13836
+          created: 1772533705802
+          modified: 1772710764919
+          isPrivate: false
+          description: ""
+          sortKey: -1772700429756
+        method: PATCH
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/borrowings"
+        name: Create a borrowing
+        meta:
+          id: req_0571db91b0df452f9f7522c9b2bb996d
+          created: 1772533719518
+          modified: 1772710533885
+          isPrivate: false
+          description: ""
+          sortKey: -1772700429956
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"userId": 2,
+            	"bookId": 6
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/borrowings/1"
+        name: Get a borrowing
+        meta:
+          id: req_8d1ded70f948491ebab77c75d4ead63b
+          created: 1772533729015
+          modified: 1772709402740
+          isPrivate: false
+          description: ""
+          sortKey: -1772700430056
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Books
+    meta:
+      id: fld_dd2f3e5226334ab9855a5158035a0a3e
+      created: 1772700456288
+      modified: 1772700456288
+      sortKey: -1772700456288
+      description: ""
+    children:
+      - url: "{{ API_ENDPOINT }}/books"
+        name: Get all books
+        meta:
+          id: req_371b23d876a9439dbb62470ed60ee73e
+          created: 1772520961467
+          modified: 1772709126854
+          isPrivate: false
+          description: ""
+          sortKey: -1772700460581
+        method: GET
+        parameters:
+          - name: category
+            value: "2"
+            description: ""
+            disabled: false
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/books/14"
+        name: Get a book
+        meta:
+          id: req_c20462ae190d491a964215a7c68285a5
+          created: 1772521539571
+          modified: 1772700475908
+          isPrivate: false
+          description: ""
+          sortKey: -1772700460531
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/books"
+        name: Create a book
+        meta:
+          id: req_b234bd39618c4d4db0e0ad9aac7d434a
+          created: 1772521560741
+          modified: 1772709381930
+          isPrivate: false
+          description: ""
+          sortKey: -1772700460518.5
+        method: POST
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: title
+              value: Cara Meraih Suskes di Era Digital
+              description: ""
+              disabled: false
+            - name: author
+              value: Primakara
+              description: ""
+              disabled: false
+            - name: year
+              value: "2026"
+              description: ""
+              disabled: false
+            - name: cover
+              value: ""
+              description: ""
+              disabled: false
+              fileName: C:\Users\adiar\Downloads\Recap DevFest Bali 2025 White Logo.png
+              type: file
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/books/20"
+        name: Update a book
+        meta:
+          id: req_a8d7cc56803b404bab19d82d53f3e321
+          created: 1772523363459
+          modified: 1772709172937
+          isPrivate: false
+          description: ""
+          sortKey: -1772700460506
+        method: PUT
+        body:
+          mimeType: multipart/form-data
+          params:
+            - name: cover
+              value: ""
+              description: ""
+              disabled: true
+              fileName: C:\Users\adiar\Downloads\WhatsApp Image 2026-02-14 at 14.26.53.jpeg
+              type: file
+            - name: title
+              value: Cara konversi mata kuliah menjadi sawit
+              description: ""
+              disabled: false
+            - name: categoryId
+              value: "2"
+              description: ""
+              disabled: false
+        headers:
+          - name: Content-Type
+            value: multipart/form-data
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/books/15"
+        name: Delete a book
+        meta:
+          id: req_e2b5b54de81c415681e4dce2fe36468b
+          created: 1772523449083
+          modified: 1772704096341
+          isPrivate: false
+          description: ""
+          sortKey: -1772700460381
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: User
+    meta:
+      id: fld_74d77bd3370b44c18f3caca3f11b97d6
+      created: 1772700561990
+      modified: 1772701256427
+      sortKey: -1772700561990
+      description: ""
+    children:
+      - url: "{{ API_ENDPOINT }}/users"
+        name: Get all users
+        meta:
+          id: req_98cb492c13a04052b533847eeaa0e244
+          created: 1772533355694
+          modified: 1772709575514
+          isPrivate: false
+          description: ""
+          sortKey: -1772700573143
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/users/1"
+        name: Get a user
+        meta:
+          id: req_6c77e794649048cb89e7d4cf909e2d65
+          created: 1772533370187
+          modified: 1772709625733
+          isPrivate: false
+          description: ""
+          sortKey: -1772700573043
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/users"
+        name: Create a user
+        meta:
+          id: req_3d828d85585a4ad4be39a4d57d2701e1
+          created: 1772533377241
+          modified: 1772709652238
+          isPrivate: false
+          description: ""
+          sortKey: -1772700572993
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Danuartha",
+            	"email": "danuartha@gmail.com",
+            	"password": "password",
+            	"role": "USER"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/users/3"
+        name: Update a user
+        meta:
+          id: req_09e76b0ab92f43b882dc5ce1002ac113
+          created: 1772533606411
+          modified: 1772709729995
+          isPrivate: false
+          description: ""
+          sortKey: -1772700572968
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Danu Selem"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/users/3"
+        name: Delete a user
+        meta:
+          id: req_f6839f4dac654a78b84ff9fe552ca1fd
+          created: 1772533640473
+          modified: 1772709974438
+          isPrivate: false
+          description: ""
+          sortKey: -1772700572943
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Categories
+    meta:
+      id: fld_45f1191049b442e684da50924890de37
+      created: 1772700603295
+      modified: 1772700603295
+      sortKey: -1772700509139
+      description: ""
+    children:
+      - url: "{{ API_ENDPOINT }}/categories"
+        name: Get all categories
+        meta:
+          id: req_70c9c295f7f042e3a4532b3d93e9999c
+          created: 1772700603300
+          modified: 1772700614283
+          isPrivate: false
+          description: ""
+          sortKey: -1772700573143
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/categories/1"
+        name: Get a category
+        meta:
+          id: req_c9ec9b6c75a44dc480bcd7c10eb4d9d1
+          created: 1772700603303
+          modified: 1772700633053
+          isPrivate: false
+          description: ""
+          sortKey: -1772700573043
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/categories"
+        name: Create a category
+        meta:
+          id: req_0708c6ce75b94f68ac9e60eff2741aba
+          created: 1772700603304
+          modified: 1772710059964
+          isPrivate: false
+          description: ""
+          sortKey: -1772700572993
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Politics"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/categories/1"
+        name: Update a category
+        meta:
+          id: req_348fc7a66e6744a2bb111fea9294badb
+          created: 1772700603304
+          modified: 1772710031614
+          isPrivate: false
+          description: ""
+          sortKey: -1772700572968
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"name": "Education"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ API_ENDPOINT }}/categories/2"
+        name: Delete a category
+        meta:
+          id: req_539ac8f96a6542c7a00359611d47b3d0
+          created: 1772700603305
+          modified: 1772710068410
+          isPrivate: false
+          description: ""
+          sortKey: -1772700572943
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/12.2.0
+            description: ""
+            disabled: false
+          - name: Authorization
+            value: Bearer {{ TOKEN }}
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_2f6e19d11b3145759b967df1bdfa0493
+    created: 1772520961464
+    modified: 1772520961464
+environments:
+  name: Base Environment
+  meta:
+    id: env_7a5d5fb7ae5d467896fb083b78cd0f5b
+    created: 1772520961464
+    modified: 1772708086730
+    isPrivate: false
+  data:
+    API_ENDPOINT: http://localhost:3000/api
+    TOKEN: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NzI3MDgwNzgsImV4cCI6MTc3MjcxMTY3OH0.97X-n_L5JMWp8Fnn0eqZDlCy3IySv5qiS1Uwtyx_-vQ

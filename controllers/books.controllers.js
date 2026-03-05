@@ -131,6 +131,7 @@ export const updateBook = async (req, res) => {
     title: req.body.title,
     author: req.body.author,
     year: req.body.year,
+    categoryId: req.body.categoryId,
   };
 
   const cover = req.file;
@@ -159,6 +160,12 @@ export const updateBook = async (req, res) => {
 
     if (!updatedBook) {
       return res.status(500).json({ message: 'Error updating book' });
+    }
+
+    if (updatedBook.cloudinaryId) {
+      updatedBook.coverUrl = getFileUrl(updatedBook.cloudinaryId);
+    } else {
+      updatedBook.coverUrl = null;
     }
 
     res.json({ message: 'Book updated successfully', book: updatedBook });

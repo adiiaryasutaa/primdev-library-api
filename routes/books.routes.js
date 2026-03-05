@@ -32,6 +32,11 @@ const bookValidation = [
     .notEmpty()
     .withMessage('Year is required')
     .toInt(),
+  body('categoryId')
+    .optional()
+    .isNumeric()
+    .withMessage('Category ID must be a number')
+    .toInt(),
   body('cover').custom((value, { req }) => {
     const cover = req.file;
 
@@ -74,6 +79,11 @@ const updateBookValidation = [
     .withMessage('Year must be a positive integer')
     .notEmpty()
     .withMessage('Year is required')
+    .toInt(),
+  body('categoryId')
+    .optional()
+    .isNumeric()
+    .withMessage('Category ID must be a number')
     .toInt(),
   body('cover').custom((value, { req }) => {
     const cover = req.file;

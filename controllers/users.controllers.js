@@ -1,10 +1,12 @@
 import bcrypt from 'bcryptjs';
+import 'dotenv/config.js';
 import { validationResult } from 'express-validator';
 import prisma from '../database/config.database.js';
+import { parse } from 'dotenv';
 
 export const getAllUsers = async (req, res) => {
   const users = await prisma.users.findMany({
-    select: { password: false },
+    select: { id: true, name: true, email: true, role: true, createdAt: true },
   });
 
   res.json(users);
@@ -15,7 +17,7 @@ export const getUserById = async (req, res) => {
 
   const user = await prisma.users.findUnique({
     where: { id: parseInt(id) },
-    select: { password: false },
+    select: { id: true, name: true, email: true, role: true, createdAt: true },
   });
 
   if (!user) {
@@ -54,7 +56,13 @@ export const createUser = async (req, res) => {
 
     const user = await prisma.users.create({
       data: { name, email, password: hashedPassword, ...(role && { role }) },
-      select: { password: false },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        createdAt: true,
+      },
     });
 
     res.status(201).json({ message: 'User created', user });
@@ -82,19 +90,30 @@ export const updateUser = async (req, res) => {
     return res.status(404).json({ message: 'User not found' });
   }
 
-  const { name, email, password, role } = req.body;
-  const updateData = {};
+  const updateData = {
+    name: req.body.name,
+    email: req.body.email,
+    role: req.body.role,
+  };
 
-  if (name) updateData.name = name;
-  if (email) updateData.email = email;
-  if (password) updateData.password = await bcrypt.hash(password, 10);
-  if (role) updateData.role = role;
+  if (req.body.password) {
+    updateData.password = await bcrypt.hash(
+      req.body.password,
+      parseInt(process.env.BCRYPT_SALT_ROUNDS),
+    );
+  }
 
   try {
     const updatedUser = await prisma.users.update({
       where: { id: parseInt(id) },
       data: updateData,
-      select: { password: false },
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+        createdAt: true,
+      },
     });
 
     res.json({ message: 'User updated', user: updatedUser });
